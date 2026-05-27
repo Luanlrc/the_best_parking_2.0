@@ -6,7 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "The Best Parking API", version = "1.0", description = "Sistema de gestao de estacionamento"))
+@OpenAPIDefinition(info = @Info(
+        title = "The Best Parking API",
+        version = "1.0",
+        description = "Sistema de gestao de estacionamento")
+)
 public class EstacionamentoApplication {
 
     public static void main(String[] args) {

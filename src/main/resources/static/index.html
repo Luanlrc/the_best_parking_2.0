@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Best Parking</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="app">
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+        <div class="brand">
+            <span class="brand-icon">P</span>
+            <div>
+                <strong>The Best Parking</strong>
+                <small>Gestão de estacionamento</small>
+            </div>
+        </div>
+        <nav class="nav">
+            <a class="nav-item active" data-view="dashboard"><span class="nav-ico">▣</span> Dashboard</a>
+            <a class="nav-item" data-view="patio"><span class="nav-ico">⛟</span> Pátio (entrada/saída)</a>
+            <a class="nav-item" data-view="clientes"><span class="nav-ico">☻</span> Clientes</a>
+            <a class="nav-item" data-view="automoveis"><span class="nav-ico">⛍</span> Automóveis</a>
+            <a class="nav-item" data-view="vagas"><span class="nav-ico">▦</span> Vagas</a>
+            <a class="nav-item" data-view="tipos"><span class="nav-ico">⛀</span> Tipos de automóvel</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/swagger-ui.html" target="_blank">API / Swagger ↗</a>
+        </div>
+    </aside>
+
+    <!-- ===== CONTEÚDO ===== -->
+    <main class="content">
+        <header class="topbar">
+            <h1 id="view-title">Dashboard</h1>
+            <button class="btn btn-primary" id="topbar-action" hidden></button>
+        </header>
+
+        <!-- DASHBOARD -->
+        <section class="view" id="view-dashboard">
+            <div class="cards" id="dash-cards"></div>
+            <div class="panel">
+                <div class="panel-head"><h2>Veículos no pátio agora</h2></div>
+                <div class="table-wrap">
+                    <table id="dash-table">
+                        <thead>
+                        <tr><th>Placa</th><th>Vaga</th><th>Entrada</th><th>Tempo</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁTIO -->
+        <section class="view" id="view-patio" hidden>
+            <div class="grid-2">
+                <div class="panel">
+                    <div class="panel-head"><h2>Registrar entrada (check-in)</h2></div>
+                    <form id="form-checkin" class="form">
+                        <label>Placa do automóvel
+                            <select name="placa" required></select>
+                        </label>
+                        <label>Vaga livre
+                            <select name="idVaga" required></select>
+                        </label>
+                        <button type="submit" class="btn btn-primary">Registrar entrada</button>
+                    </form>
+                </div>
+                <div class="panel">
+                    <div class="panel-head"><h2>Registrar saída (check-out)</h2></div>
+                    <form id="form-checkout" class="form">
+                        <label>Placa do automóvel no pátio
+                            <select name="placa" required></select>
+                        </label>
+                        <button type="submit" class="btn btn-success">Registrar saída e cobrar</button>
+                    </form>
+                    <div id="checkout-result" class="result" hidden></div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-head"><h2>Movimentações abertas</h2></div>
+                <div class="table-wrap">
+                    <table id="patio-table">
+                        <thead>
+                        <tr><th>Placa</th><th>Vaga</th><th>Entrada</th><th>Tempo</th><th></th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLIENTES -->
+        <section class="view" id="view-clientes" hidden>
+            <div class="panel">
+                <div class="table-wrap">
+                    <table id="clientes-table">
+                        <thead>
+                        <tr><th>ID</th><th>Nome</th><th>CPF</th><th>Telefone</th><th></th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUTOMÓVEIS -->
+        <section class="view" id="view-automoveis" hidden>
+            <div class="panel">
+                <div class="table-wrap">
+                    <table id="automoveis-table">
+                        <thead>
+                        <tr><th>ID</th><th>Placa</th><th>Modelo</th><th>Cor</th><th>Tipo</th><th>Cliente</th><th>Mensalista</th><th></th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VAGAS -->
+        <section class="view" id="view-vagas" hidden>
+            <div class="panel">
+                <div class="table-wrap">
+                    <table id="vagas-table">
+                        <thead>
+                        <tr><th>ID</th><th>Número</th><th>Status</th><th></th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIPOS -->
+        <section class="view" id="view-tipos" hidden>
+            <div class="panel">
+                <div class="table-wrap">
+                    <table id="tipos-table">
+                        <thead>
+                        <tr><th>ID</th><th>Nome</th><th>Valor/hora</th><th></th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-backdrop" id="modal-backdrop" hidden>
+    <div class="modal">
+        <div class="modal-head">
+            <h3 id="modal-title">Título</h3>
+            <button class="modal-close" id="modal-close">✕</button>
+        </div>
+        <form id="modal-form" class="form"></form>
+    </div>
+</div>
+
+<!-- ===== TOASTS ===== -->
+<div class="toast-container" id="toast-container"></div>
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
