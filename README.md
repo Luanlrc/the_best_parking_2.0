@@ -56,8 +56,8 @@ As configurações do banco ficam em `src/main/resources/application.properties`
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/estacionamento
-spring.datasource.username=postgres
-spring.datasource.password=luan123
+spring.datasource.username=seu_usuario
+spring.datasource.password=sua_senha
 ```
 
 Ajuste `username` e `password` conforme o seu PostgreSQL.
